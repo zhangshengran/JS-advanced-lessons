@@ -102,4 +102,4 @@ b.pop();
         "use strict"
         function isStrictMode(){
             return this===window?false:true
-        }
+        }、、
