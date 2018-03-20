@@ -83,7 +83,7 @@ b.pop();
         }
         console.log(b);
 
-        //使用严格模式
+        //使用严格模式,//严格模式下，块作用域的变量再外边不能访问
         'use strict'
         function foo()
         {
@@ -102,4 +102,58 @@ b.pop();
         "use strict"
         function isStrictMode(){
             return this===window?false:true
-        }、、
+        }
+        //严格模式下，this指向window
+//严格模式下禁止删除不可改变的属性
+var str = "abc";
+var strDescriptor = Object.getOwnPropertyDescriptor(window)
+console.log(strDescriptor);
+function sloppyFunc(){
+    str.length = 7;
+}
+//demo 08
+//switch 语句再比较值的时候使用的是全等操作符，因此不会发生类型改变
+var i="1";
+switch(i){
+    case 1;
+    console.log("case 1 Number");
+    break;
+    default;
+    console.log("default");
+}
+//输出default 而不是 case 1 Number
+var i = "1";
+switch(i){
+    case 1:
+        console.log("case 1 Number");
+        break;
+    case "1":
+        console.log("case 1 String");
+        break;
+    default:
+        console.log("default");
+}
+//此时输出 case 1 String
+var i = 65;
+switch(true){ //思考若是改为 switch(new Boolean(true)){ 会怎样
+    case i>=60:
+        alert('及格');
+        break;
+    case i<60:
+        alert('不及格');
+        break;
+    default:
+        alert('default');
+}//改了后输出default
+//demo 10
+//for ...in 遍历数组
+var arr=[2,'33'];
+for(var i in arr){
+    console.log(i,arr[i]);
+}
+//遍历对象
+var obj={x:10,y:20,z:"30"};
+for(var i in obj)
+{
+    console.log(i,obj[i])
+}
